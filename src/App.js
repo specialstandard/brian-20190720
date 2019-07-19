@@ -1,19 +1,44 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
 
 const App = () => {
-  const [selectedFile, setSelectedFile] = useState(null)
-  const [loaded, setLoaded] = useState(0)
+  const TYPES = ['image/png', 'image/jpeg'];
+  // const MAX_SIZE = 10000000;
+  const MAX_SIZE = 10000;
+
+  const [error, setError] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChangeHandler = (event) => {
-    const files = event.target.files
+    console.log('event.target.files: ', event.target.files);
+    const file = event.target.files[0]
+
+    if(file.size > MAX_SIZE) {
+      console.log('too big');
+      return;
+    }
+    if(!TYPES.includes(file.type)) {
+      console.log('must be png or jpeg');
+      return;
+    }
+    const data = new FormData()
+    data.append('file', file)
+
+    console.log('process.env: ', process.env);
+    axios.post(process.env.REACT_APP_API_URL, data)
+      .then(() => console.log('success uploading'))
+      .catch(error => {
+        console.log('error: ', error);
+      })
   }
+
   return (
     <div className="App">
       <input type="text" placeholder="Search documents..."/>
       <label className="uploadButton">UPLOAD
-        <input type="file" hidden class="form-control" multiple onChange={onChangeHandler} />
+        <input type="file" hidden class="form-control" onChange={onChangeHandler} />
       </label>
     </div>
   );
