@@ -4,8 +4,8 @@ import './App.css';
 
 const App = () => {
   const TYPES = ['image/png', 'image/jpeg'];
-  // const MAX_SIZE = 10000000;
-  const MAX_SIZE = 10000;
+  const MAX_SIZE = 10000000;
+  // const MAX_SIZE = 10000;
 
   const [error, setError] = useState(null);
   const [files, setFiles] = useState([]);
@@ -28,7 +28,10 @@ const App = () => {
 
     console.log('process.env: ', process.env);
     axios.post(process.env.REACT_APP_API_URL, data)
-      .then(() => console.log('success uploading'))
+      .then(() => {
+        console.log('success uploading')
+        setFiles([...files, file])
+      })
       .catch(error => {
         console.log('error: ', error);
       })
@@ -36,10 +39,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <input type="text" placeholder="Search documents..."/>
-      <label className="uploadButton">UPLOAD
-        <input type="file" hidden class="form-control" onChange={onChangeHandler} />
-      </label>
+      <div className="container">
+
+        <div className="controls">
+          <input className="searchBox" type="text" placeholder="Search documents..."/>
+          <label className="uploadButton">UPLOAD
+            <input type="file" hidden class="form-control" onChange={onChangeHandler} />
+          </label>
+        </div>
+
+        <div className="files">
+          {files.map((file) => (
+            <div className="file">{file.name}</div>
+          ))}
+        </div>
+
+      </div>
     </div>
   );
 }
