@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -8,10 +8,16 @@ const App = () => {
   // const MAX_SIZE = 10000;
 
   const [error, setError] = useState(null);
-  const [files, setFiles] = useState([]);
+  const [allFiles, setAllFiles] = useState([]);
+  const [searchQuery, setSearchQuery] = useState([]);
+  const [filteredFiles, setFilteredFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onChangeHandler = (event) => {
+  useEffect((event) => {
+    setFilteredFiles(allFiles.filter(({ name }) => name.includes(searchQuery)))
+  }, [allFiles, searchQuery])
+
+  const fileChangeHandler = (event) => {
     console.log('event.target.files: ', event.target.files);
     const file = event.target.files[0]
 
@@ -30,11 +36,15 @@ const App = () => {
     axios.post(process.env.REACT_APP_API_URL, data)
       .then(() => {
         console.log('success uploading')
-        setFiles([...files, file])
+        setAllFiles([...allFiles, file])
       })
       .catch(error => {
         console.log('error: ', error);
       })
+  }
+
+  const searchChangeHandler = (event) => {
+    setSearchQuery(event.target.value);
   }
 
   return (
@@ -42,14 +52,14 @@ const App = () => {
       <div className="container">
 
         <div className="controls">
-          <input className="searchBox" type="text" placeholder="Search documents..."/>
+          <input className="searchBox" type="text" value={searchQuery} onChange={searchChangeHandler} placeholder="Search documents..."/>
           <label className="uploadButton">UPLOAD
-            <input type="file" hidden class="form-control" onChange={onChangeHandler} />
+            <input type="file" hidden class="form-control" onChange={fileChangeHandler} />
           </label>
         </div>
 
         <div className="files">
-          {files.map((file) => (
+          {filteredFiles.map((file) => (
             <div className="file">{file.name}</div>
           ))}
         </div>
