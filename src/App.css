@@ -39,9 +39,11 @@
 }
 
 .file {
-  flex: 1 0 300px;
-  /* width: 300px; */
+  flex: 1 0 305px;
+  max-width: 305px;
   border: 1px solid #333;
+  margin-bottom: 10px;
+  height: 100px;
 }
 
 @media only screen and (max-width: 480px) {
@@ -62,5 +64,11 @@
 
   .searchBox {
     width: initial;
+  }
+
+  .file {
+    height: 80px;
+    max-width: inherit;
+    margin-bottom: 8px;
   }
 }
