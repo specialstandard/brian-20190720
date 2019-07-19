@@ -58,9 +58,14 @@ const App = () => {
           </label>
         </div>
 
+        <div className="status">
+          <div className="count">{filteredFiles.length} document{filteredFiles.length === 1 ? '' : 's'}</div>
+          <div className="totalSize">Total size: {Math.floor(filteredFiles.reduce((acc, item) => acc + item.size, 0) / 1000)}kb</div>
+        </div>
+
         <div className="files">
           {filteredFiles.map((file) => (
-            <div className="file">{file.name}</div>
+            <div className="file" key={file.name}>{file.name}</div>
           ))}
         </div>
 

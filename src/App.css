@@ -8,21 +8,36 @@
   display: inline-flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 10px;
+  margin: 12px;
   min-width: 320px;
   max-width: 960px;
 }
 
-.controls {
+.controls, .status {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+}
+
+.controls {
+  margin-bottom: 30px;
+}
+
+.status {
+  margin-bottom: 15px;
+}
+
+.count {
+  font-size: 28px;
+}
+
+.count, .totalSize {
+  line-height: 28px;
 }
 
 .searchBox, .uploadButton {
-  font-size: 12px;
-  height: 40px;
-  line-height: 40px;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
   width: 300px;
   padding-left: 4px;
 }
@@ -34,16 +49,18 @@
 
 .files {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
+  margin: 0 -10px;
 }
 
 .file {
+  border: .5px solid #333;
+  height: 100px;
+  margin: 0 10px 10px;
   flex: 1 0 305px;
   max-width: 305px;
-  border: 1px solid #333;
-  margin-bottom: 10px;
-  height: 100px;
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -52,8 +69,14 @@
     flex-direction: column;
   }
 
-  .controls {
+  .controls, .status {
     flex-direction: column;
+    margin-bottom: 12px;
+  }
+
+  .status {
+    align-items: flex-start;
+    margin-bottom: 8px;
   }
 
   .uploadButton {
