@@ -8,7 +8,7 @@ import Status from './components/Status/Status';
 import useFileUploader from './hooks/useFileUploader';
 
 const App = () => {
-  const [error, isLoading, searchQuery, filteredFiles, fileChangeHandler, deleteHandler, searchChangeHandler] = useFileUploader();
+  const { error, isLoading, searchQuery, filteredFiles, fileChangeHandler, deleteHandler, searchChangeHandler } = useFileUploader();
 
   return (
     <div className="App">

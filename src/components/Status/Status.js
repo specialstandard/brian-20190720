@@ -4,8 +4,8 @@ import bytesToKilobytes from '../../utils/bytesToKilobytes';
 
 const Status = ({ filteredFiles }) => (
   <div className="status">
-    <div className="count">{filteredFiles.length} document{filteredFiles.length === 1 ? '' : 's'}</div>
-    <div className="totalSize">Total size: {bytesToKilobytes(filteredFiles.reduce((acc, item) => acc + item.size, 0))}kb</div>
+    <div className="count" data-testid="count">{filteredFiles.length} document{filteredFiles.length === 1 ? '' : 's'}</div>
+    <div className="totalSize" data-testid="totalSize">Total size: {bytesToKilobytes(filteredFiles.reduce((acc, item) => acc + item.size, 0))}kb</div>
   </div>
 )
 

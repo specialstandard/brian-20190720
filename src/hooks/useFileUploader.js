@@ -17,37 +17,31 @@ export default function useFileUploader() {
   }, [allFiles, searchQuery])
 
   const fileChangeHandler = useCallback((event) => {
-    console.log('event.target.files: ', event.target.files);
-    const file = event.target.files[0]
+    const file = event.target.files[0];
     event.target.value = null;
 
     if(allFiles.some((existingFile) => existingFile.name === file.name)) {
-      console.log('File has already been uploaded');
       setError('File has already been uploaded');
       return;
     }
     if(file.size > MAX_SIZE) {
-      console.log('File must be less than 10MB');
       setError('File must be less than 10MB');
       return;
     }
     if(!ALLOWED_TYPES.includes(file.type)) {
-      console.log('File must be PNG or JPEG format');
       setError('File must be PNG or JPEG format');
       return;
     }
     const data = new FormData();
     data.append('file', file);
 
-    console.log('process.env: ', process.env);
     setIsLoading(true);
     axios.post(process.env.REACT_APP_API_URL, data)
       .then(() => {
-        console.log('success uploading');
         setAllFiles([...allFiles, file]);
       })
       .catch(error => {
-        console.log('error: ', error);
+        setError('Sorry, there was an error uploading. Please try again.');
       })
       .finally(() => {
         setIsLoading(false);
@@ -62,5 +56,5 @@ export default function useFileUploader() {
     setSearchQuery(event.target.value);
   }, [])
 
-  return [error, isLoading, searchQuery, filteredFiles, fileChangeHandler, deleteHandler, searchChangeHandler];
+  return {error, isLoading, searchQuery, filteredFiles, fileChangeHandler, deleteHandler, searchChangeHandler};
 }
