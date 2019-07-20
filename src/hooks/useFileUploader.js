@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 import axios from 'axios';
 
 export default function useFileUploader() {
-  const TYPES = ['image/png', 'image/jpeg'];
+  const ALLOWED_TYPES = ['image/png', 'image/jpeg'];
   const MAX_SIZE = 10000000;
 
   const [error, setError] = useState(null);
   const [allFiles, setAllFiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredFiles, setFilteredFiles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setFilteredFiles(allFiles.filter(({ name }) => name.toLowerCase().includes(searchQuery.toLowerCase())));
@@ -31,7 +31,7 @@ export default function useFileUploader() {
       setError('File must be less than 10MB');
       return;
     }
-    if(!TYPES.includes(file.type)) {
+    if(!ALLOWED_TYPES.includes(file.type)) {
       console.log('File must be PNG or JPEG format');
       setError('File must be PNG or JPEG format');
       return;
@@ -40,7 +40,7 @@ export default function useFileUploader() {
     data.append('file', file);
 
     console.log('process.env: ', process.env);
-    setIsLoading(true)
+    setIsLoading(true);
     axios.post(process.env.REACT_APP_API_URL, data)
       .then(() => {
         console.log('success uploading');
@@ -52,7 +52,7 @@ export default function useFileUploader() {
       .finally(() => {
         setIsLoading(false);
       })
-  }, [TYPES, allFiles])
+  }, [ALLOWED_TYPES, allFiles])
 
   const deleteHandler = useCallback((fileName) => {
     setAllFiles(allFiles.filter((file) => file.name !== fileName));
