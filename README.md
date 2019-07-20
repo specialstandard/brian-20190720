@@ -47,8 +47,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Security
 
-// List security concerns:
-// - that have been addressed
+Some validation has been done on front end in terms of file type, size, file existance, but would be great to make it more robust.
 Enabling CORS on the API server may be a security concern worth investigating in a future phase of development
 
 ## Improvements
@@ -56,6 +55,11 @@ Enabling CORS on the API server may be a security concern worth investigating in
 Authentication and or encryption enhancements could be added to the API server in future development
 
 ## Libraries
+
+Mostly vanilla React except for the following libraries used for testing, and to create the API server, respectively:
+
+@testing-library/jest-dom: Makes testing fun
+@testing-library/react: Testing library,
 
 axios: Promise based HTTP client to send files to the API server
 cors: Enables CORS on the file API server
