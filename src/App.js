@@ -13,7 +13,7 @@ const App = () => {
   const [filteredFiles, setFilteredFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect((event) => {
+  useEffect(() => {
     setFilteredFiles(allFiles.filter(({ name }) => name.includes(searchQuery)))
   }, [allFiles, searchQuery])
 
@@ -47,6 +47,12 @@ const App = () => {
     setSearchQuery(event.target.value);
   }
 
+  const deleteHandler = (fileName) => {
+    setAllFiles(allFiles.filter((file) => file.name !== fileName));
+  }
+
+  const bytesToKilobytes = (val) => Math.round(val / 1000);
+
   return (
     <div className="App">
       <div className="container">
@@ -60,12 +66,20 @@ const App = () => {
 
         <div className="status">
           <div className="count">{filteredFiles.length} document{filteredFiles.length === 1 ? '' : 's'}</div>
-          <div className="totalSize">Total size: {Math.floor(filteredFiles.reduce((acc, item) => acc + item.size, 0) / 1000)}kb</div>
+          <div className="totalSize">Total size: {bytesToKilobytes(filteredFiles.reduce((acc, item) => acc + item.size, 0))}kb</div>
         </div>
 
         <div className="files">
           {filteredFiles.map((file) => (
-            <div className="file" key={file.name}>{file.name}</div>
+            <div className="file" key={file.name}>
+              <div className="fileInfo">
+                <div className="fileName">{file.name}</div>
+                <div className="fileSize">{bytesToKilobytes(file.size)}kb</div>
+              </div>
+              <div className="deleteButton">
+                <button onClick={() => deleteHandler(file.name)}>delete</button>
+              </div>
+            </div>
           ))}
         </div>
 

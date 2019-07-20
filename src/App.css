@@ -8,7 +8,7 @@
   display: inline-flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 12px;
+  margin: 20px 12px;
   min-width: 320px;
   max-width: 960px;
 }
@@ -43,6 +43,7 @@
 }
 
 .uploadButton {
+  background-color: #ddd;
   border: 1px solid #333;
   width: 100px;
 }
@@ -55,18 +56,35 @@
 }
 
 .file {
+  display: flex;
   border: .5px solid #333;
   height: 100px;
   margin: 0 10px 10px;
-  flex: 1 0 305px;
+  flex: 1 0 306.66px;
   max-width: 305px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
 
+.fileInfo {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: space-evenly;
+}
+
+.deleteButton > button {
+  background-color: #ddd;
+  border: 1px solid #000;
 }
 
 @media only screen and (max-width: 480px) {
 
   .container {
     flex-direction: column;
+    margin: 12px;
   }
 
   .controls, .status {
