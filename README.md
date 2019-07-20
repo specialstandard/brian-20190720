@@ -1,8 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Brian Ardito - 07/21/2014
 
-## Available Scripts
+## Installation
 
 In the project directory, you can run:
+
+### `npm install`
+
+Installs all the necessary dependencies
+
+### `node server.js`
+
+Runs the file manager server API
 
 ### `npm start`
 
@@ -37,32 +45,34 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Security
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+// List security concerns:
+// - that have been addressed
+Enabling CORS on the API server may be a security concern worth investigating in a future phase of development
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Improvements
 
-### Code Splitting
+Authentication and or encryption enhancements could be added to the API server in future development
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Libraries
 
-### Analyzing the Bundle Size
+axios: Promise based HTTP client to send files to the API server
+cors: Enables CORS on the file API server
+express: Standard web framework for API
+multer: NodeJs middleware for handling multipart/form-data, for uploading files
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## API
 
-### Making a Progressive Web App
+Bare-bones node express server to allow uploading files from the react front-end
+```
+### POST /upload
+Receives multipart/form-data (file) to upload
+Returns 500 if server error
+Returns 200 if success uploading the file
+Accepts the file to upload.
+```
+---
+## Other notes
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Really fun code challenge; thank you. 🙂

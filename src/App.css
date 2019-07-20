@@ -13,103 +13,10 @@
   max-width: 960px;
 }
 
-.controls, .status {
-  display: flex;
-  justify-content: space-between;
-}
-
-.controls {
-  margin-bottom: 30px;
-}
-
-.status {
-  margin-bottom: 15px;
-}
-
-.count {
-  font-size: 28px;
-}
-
-.count, .totalSize {
-  line-height: 28px;
-}
-
-.searchBox, .uploadButton {
-  font-size: 14px;
-  height: 30px;
-  line-height: 30px;
-  width: 300px;
-  padding-left: 4px;
-}
-
-.uploadButton {
-  background-color: #ddd;
-  border: 1px solid #333;
-  width: 100px;
-}
-
-.files {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  margin: 0 -10px;
-}
-
-.file {
-  display: flex;
-  border: .5px solid #333;
-  height: 100px;
-  margin: 0 10px 10px;
-  flex: 1 0 306.66px;
-  max-width: 305px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-}
-
-.fileInfo {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  justify-content: space-evenly;
-}
-
-.deleteButton > button {
-  background-color: #ddd;
-  border: 1px solid #000;
-}
-
 @media only screen and (max-width: 480px) {
 
   .container {
     flex-direction: column;
     margin: 12px;
-  }
-
-  .controls, .status {
-    flex-direction: column;
-    margin-bottom: 12px;
-  }
-
-  .status {
-    align-items: flex-start;
-    margin-bottom: 8px;
-  }
-
-  .uploadButton {
-    margin-bottom: 10px;
-    order: -1;
-    width: initial;
-  }
-
-  .searchBox {
-    width: initial;
-  }
-
-  .file {
-    height: 80px;
-    max-width: inherit;
-    margin-bottom: 8px;
   }
 }
