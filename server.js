@@ -1,7 +1,7 @@
-var express = require('express');
-var app = express();
-var multer = require('multer');
-var cors = require('cors');
+const express = require('express');
+const app = express();
+const multer = require('multer');
+const cors = require('cors');
 app.use(cors());
 
 const storage = multer.diskStorage({
